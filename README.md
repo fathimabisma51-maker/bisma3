@@ -6,93 +6,53 @@
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: [Labu]
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
-
+- Team Lead: [Bisma] - [Jain University]
 ### Project Description
-[2-3 lines about what your project does]
+[the project is about finding the ratio of vazhas and banana trees which is completely useless]
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+[to find which is more banana trees of vazhas]
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+[by creating a website that can calculate the ratio of vazhas and banana trees and find which is greater in an area]
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- [HTML]
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
-
-### Implementation
-For Software:
-# Installation
-[commands]
-
-# Run
-[commands]
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
+![<img width="862" height="433" alt="Screenshot 2026-09-05 191633" src="https://github.com/user-attachments/assets/1bf0c0d9-0a2d-4b9c-981d-0bc7bbea92dd" />
+it shows the ratio of number of vazhas and banana trees](Add screenshot 1 here with proper name)
 *Add caption explaining what this shows*
 
-![Screenshot2](Add screenshot 2 here with proper name)
+![<img width="872" height="434" alt="Screenshot 2026-09-05 191653" src="https://github.com/user-attachments/assets/ad384de9-0895-4c89-bb41-a363bf39b0f4" />
+it shows the number of identified vazhas and banana trees and tree ratio](Add screenshot 2 here with proper name)
 *Add caption explaining what this shows*
 
-![Screenshot3](Add screenshot 3 here with proper name)
+![<img width="875" height="398" alt="Screenshot 2026-09-05 191733" src="https://github.com/user-attachments/assets/46f21921-6651-48b2-87a4-b751b06201ee" />
+regional census and leaderboard](Add screenshot 3 here with proper name)
 *Add caption explaining what this shows*
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
-
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
 
 ### Project Demo
 # Video
-[Add your demo video link here]
+[]
 *Explain what the video demonstrates*
 
 # Additional Demos
-[Add any extra demo materials/links]
+[]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
-
+- [Bisma]: [HTML developer]
 ---
 Made with ❤️ at TinkerHub Useless Projects 
 
