@@ -1,1 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vazha Vision - Discover the Vazha to Banana Tree ratio in your area with randomly generated field data. Built for TinkerHub Useless Projects 3.0.">
+  <title>Vazha Vision 🍌 | Banana-to-Vazha Ratio Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       Vazha Vision 🍌 - Clean Modern Dashboard Stylesheet
+       Designed for TinkerHub Useless Projects 3.0
+       ========================================================= */
+    :root {
+      --bg-main: #0c1610;
+      --bg-surface: rgba(18, 30, 22, 0.75);
+      --bg-card: rgba(24, 40, 30, 0.7);
+      --bg-card-hover: rgba(30, 50, 38, 0.85);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-highlight: rgba(247, 208, 44, 0.35);
 
+      --text-primary: #f5fbf7;
+      --text-secondary: #9db2a4;
+      --text-muted: #667d6e;
+
+      /* Accent Colors */
+      --vazha-yellow: #f7d02c;
+      --vazha-yellow-glow: rgba(247, 208, 44, 0.25);
+      --banana-green: #2ecc71;
+      --banana-green-glow: rgba(46, 204, 113, 0.25);
+      --danger-crimson: #ff4757;
+      --danger-glow: rgba(255, 71, 87, 0.25);
+      --balanced-amber: #ffa502;
+      --balanced-glow: rgba(255, 165, 2, 0.25);
+
+      /* Typography */
+      --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Elevation */
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient background glows */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(120px);
+      z-index: 0;
+      opacity: 0.45;
+    }
+
+    .glow-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #2ecc71, transparent 70%);
+      top: -100px;
+      left: -100px;
+    }
+
+    .glow-2 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #f7d02c, transparent 70%);
+      bottom: 50px;
+      right: -50px;
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Header */
+    .app-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0 8px;
+    }
+
+    .badge-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(46, 204, 113, 0.12);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      color: #a7f3d0;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2ecc71;
+      box-shadow: 0 0 10px #2ecc71;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .team-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(247, 208, 44, 0.12);
+      border: 1px solid rgba(247, 208, 44, 0.35);
+      color: #fef08a;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+    }
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(247, 208, 44, 0.25), rgba(46, 204, 113, 0.2));
+      border: 1px solid var(--border-highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px var(--vazha-yellow-glow);
+      transform: rotate(-4deg);
+      transition: var(--transition);
+    }
+
+    .logo-circle:hover {
+      transform: rotate(6deg) scale(1.08);
+    }
+
+    .logo-emoji {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .main-title {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 40%, #f7d02c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 30px rgba(247, 208, 44, 0.15);
+    }
+
+    .tagline {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .explanation-text {
+      max-width: 660px;
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .explanation-text strong {
+      color: var(--vazha-yellow);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .icon-bubble {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .card-sub {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Dashboard Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 24px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .input-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .dice-btn {
+      background: rgba(247, 208, 44, 0.12);
+      border: 1px solid rgba(247, 208, 44, 0.3);
+      color: #fef08a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+    }
+
+    .dice-btn:hover {
+      background: var(--vazha-yellow);
+      color: #0c1610;
+      transform: scale(1.04);
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      font-size: 1.1rem;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      background: rgba(10, 20, 14, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 12px 110px 12px 44px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .input-wrapper input:focus {
+      border-color: var(--vazha-yellow);
+      box-shadow: 0 0 0 4px var(--vazha-yellow-glow);
+      background: rgba(14, 28, 20, 0.9);
+    }
+
+    #area-input {
+      padding-right: 14px;
+    }
+
+    .gen-badge {
+      position: absolute;
+      right: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(46, 204, 113, 0.15);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      color: #a7f3d0;
+      pointer-events: none;
+      letter-spacing: 0.02em;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Randomize Both Bar */
+    .random-both-box {
+      margin: 4px 0 18px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .random-both-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px dashed rgba(247, 208, 44, 0.4);
+      color: #fef08a;
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .random-both-btn:hover {
+      background: rgba(247, 208, 44, 0.15);
+      border-color: var(--vazha-yellow);
+      transform: translateY(-1px);
+    }
+
+    /* Presets */
+    .presets-container {
+      margin: 0 0 20px;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--radius-sm);
+      border: 1px dashed rgba(255, 255, 255, 0.08);
+    }
+
+    .presets-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .preset-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preset-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .preset-btn:hover {
+      background: rgba(247, 208, 44, 0.15);
+      border-color: rgba(247, 208, 44, 0.35);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Actions */
+    .form-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .primary-btn {
+      flex: 1;
+      background: linear-gradient(135deg, #f7d02c, #e0b818);
+      color: #0c1610;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 13px 20px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(247, 208, 44, 0.3);
+      transition: var(--transition);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(247, 208, 44, 0.45);
+    }
+
+    .secondary-btn {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .tertiary-btn {
+      width: 100%;
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 11px;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tertiary-btn:hover {
+      background: rgba(46, 204, 113, 0.12);
+      border-color: rgba(46, 204, 113, 0.4);
+      color: #2ecc71;
+    }
+
+    /* Gauge Card */
+    .verdict-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .gauge-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 4px 0 10px;
+    }
+
+    .gauge-svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      overflow: visible;
+    }
+
+    .gauge-bg-arc {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.06);
+      stroke-width: 18;
+      stroke-linecap: round;
+    }
+
+    .gauge-segment {
+      fill: none;
+      stroke-width: 18;
+      stroke-linecap: round;
+    }
+
+    .seg-low { stroke: #2ecc71; }
+    .seg-med { stroke: #f7d02c; }
+    .seg-high { stroke: #ff4757; }
+
+    .gauge-needle-group {
+      transform-origin: 100px 100px;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .gauge-needle-line {
+      stroke: #ffffff;
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
+    }
+
+    .gauge-needle-hub {
+      fill: #ffffff;
+      stroke: #0c1610;
+      stroke-width: 2;
+    }
+
+    .gauge-needle-pin {
+      fill: var(--vazha-yellow);
+    }
+
+    .gauge-legend-text {
+      fill: var(--text-muted);
+      font-size: 9px;
+      font-weight: 600;
+      text-anchor: start;
+      letter-spacing: 0.04em;
+    }
+
+    .gauge-legend-text.center { text-anchor: middle; }
+    .gauge-legend-text.right { text-anchor: end; }
+
+    .gauge-center-reading {
+      text-align: center;
+      margin-top: -12px;
+    }
+
+    .gauge-ratio-value {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #fff;
+    }
+
+    .gauge-ratio-unit {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Verdict Banner */
+    .verdict-banner {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      border-left: 4px solid var(--balanced-amber);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .verdict-banner.status-low {
+      border-left-color: var(--banana-green);
+      background: rgba(46, 204, 113, 0.08);
+    }
+
+    .verdict-banner.status-med {
+      border-left-color: var(--balanced-amber);
+      background: rgba(255, 165, 2, 0.08);
+    }
+
+    .verdict-banner.status-high {
+      border-left-color: var(--danger-crimson);
+      background: rgba(255, 71, 87, 0.09);
+    }
+
+    .verdict-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .verdict-description {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .verdict-action {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Results Cards (Step 5) */
+    .results-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .result-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    #card-vazhas::before { background: linear-gradient(90deg, #ff4757, #ff6b81); }
+    #card-trees::before { background: linear-gradient(90deg, #2ecc71, #26af60); }
+    #card-ratio::before { background: linear-gradient(90deg, #f7d02c, #ffa502); }
+
+    .highlight-card {
+      background: rgba(247, 208, 44, 0.06);
+      border-color: rgba(247, 208, 44, 0.2);
+    }
+
+    .result-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    .metric-icon { font-size: 1.4rem; }
+
+    .metric-value-container {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    .metric-unit {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .metric-footer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Leaderboard (Step 7) */
+    .leaderboard-card {
+      padding: 28px;
+    }
+
+    .leaderboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .header-inline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .leaderboard-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-chip:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .filter-chip.active {
+      background: var(--vazha-yellow);
+      color: #0c1610;
+      border-color: var(--vazha-yellow);
+      font-weight: 700;
+      box-shadow: 0 2px 10px var(--vazha-yellow-glow);
+    }
+
+    .text-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 4px 8px;
+    }
+
+    .text-btn:hover { color: var(--text-secondary); }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .data-table th {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .data-table td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+    .col-rank {
+      font-weight: 800;
+      color: var(--text-primary);
+      width: 48px;
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 0.78rem;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .rank-1 { background: rgba(247, 208, 44, 0.25); color: #f7d02c; font-weight: bold; }
+    .rank-2 { background: rgba(200, 200, 200, 0.2); color: #eee; }
+    .rank-3 { background: rgba(205, 127, 50, 0.2); color: #e6a15c; }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .badge-tag.tag-low {
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ecc71;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+
+    .badge-tag.tag-med {
+      background: rgba(255, 165, 2, 0.15);
+      color: #ffa502;
+      border: 1px solid rgba(255, 165, 2, 0.3);
+    }
+
+    .badge-tag.tag-high {
+      background: rgba(255, 71, 87, 0.15);
+      color: #ff4757;
+      border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+
+    /* Footer */
+    .app-footer {
+      margin-top: 12px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-emoji { font-size: 1.8rem; }
+    .footer-brand strong { font-size: 0.95rem; color: var(--text-primary); }
+    .footer-brand p { font-size: 0.8rem; color: var(--text-muted); }
+    .footer-credits { text-align: right; font-size: 0.82rem; color: var(--text-secondary); }
+    .team-signature { color: var(--vazha-yellow); font-weight: 600; margin-top: 2px; }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #18281e;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow-lg);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes flash-highlight {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    .animate-pop { animation: flash-highlight 0.4s ease-out; }
+
+    /* Rolling animation for randomized numbers */
+    @keyframes roll-shake {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.08) translateY(-2px); }
+      50% { transform: scale(0.95) translateY(1px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    .rolling { animation: roll-shake 0.35s ease-in-out; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .dashboard-grid, .results-container { grid-template-columns: 1fr; }
+      .main-title { font-size: 2.2rem; }
+      .footer-credits { text-align: left; }
+    }
+
+    @media (max-width: 540px) {
+      .app-container { padding: 20px 14px 40px; }
+      .input-row { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+      .leaderboard-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Ambient background glow effects -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header Section (Step 2, 8) -->
+    <header class="app-header">
+      <div class="badge-container">
+        <span class="hub-badge">
+          <span class="dot live-dot"></span> TinkerHub Useless Projects 3.0
+        </span>
+        <span class="team-badge">Team Vazha Analytics</span>
+      </div>
+      
+      <div class="title-group">
+        <div class="logo-circle">
+          <span class="logo-emoji">🍌</span>
+        </div>
+        <div>
+          <h1 class="main-title">Vazha Vision</h1>
+          <p class="tagline">The definitive Banana-to-Vazha Ratio Intelligence Dashboard</p>
+        </div>
+      </div>
+      
+      <p class="explanation-text">
+        Is your locality home to productive photosynthetic banana trees, or is it overrun by idle 
+        <em>vazhas</em>? Enter your regional area below to inspect randomly sampled field data and compute the official <strong>Vazha Index</strong>.
+      </p>
+    </header>
+
+    <!-- Main Grid Dashboard -->
+    <main class="dashboard-grid">
+      <!-- Input Card (Step 2: title, explanation, area input, randomly generated vazha input, randomly generated banana-tree input, Calculate button) -->
+      <section class="card input-card" id="survey-form-section">
+        <div class="card-header">
+          <div class="icon-bubble">📍</div>
+          <div>
+            <h2 class="card-title">Survey Input</h2>
+            <p class="card-sub">Collect regional data with live random generators</p>
+          </div>
+        </div>
+
+        <form id="vazha-form" onsubmit="return false;">
+          <!-- Area Input -->
+          <div class="form-group">
+            <label for="area-input" class="input-label">Area / Location Name</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🏡</span>
+              <input 
+                type="text" 
+                id="area-input" 
+                placeholder="e.g. Kakkanad Chai Katta, Kochi" 
+                value="Kakkanad Chai Katta, Kochi"
+                required
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <!-- Randomly Generated Vazha Input & Banana Tree Input -->
+          <div class="input-row">
+            <!-- Vazha Input (Randomly Generated) -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="vazha-input" class="input-label">
+                  Vazhas Count
+                </label>
+                <button type="button" class="dice-btn" id="random-vazha-btn" title="Generate random vazha count">
+                  🎲 Roll
+                </button>
+              </div>
+              <div class="input-wrapper">
+                <span class="input-icon">🛋️</span>
+                <input 
+                  type="number" 
+                  id="vazha-input" 
+                  min="0" 
+                  placeholder="Randomizing..." 
+                  required
+                />
+                <span class="gen-badge">🎲 Random</span>
+              </div>
+            </div>
+
+            <!-- Banana Tree Input (Randomly Generated) -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="banana-tree-input" class="input-label">
+                  Banana Trees Count
+                </label>
+                <button type="button" class="dice-btn" id="random-tree-btn" title="Generate random banana tree count">
+                  🎲 Roll
+                </button>
+              </div>
+              <div class="input-wrapper">
+                <span class="input-icon">🌴</span>
+                <input 
+                  type="number" 
+                  id="banana-tree-input" 
+                  min="0" 
+                  placeholder="Randomizing..." 
+                  required
+                />
+                <span class="gen-badge">🎲 Random</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Randomize Both Button -->
+          <div class="random-both-box">
+            <button type="button" id="randomize-both-btn" class="random-both-btn">
+              <span>🎲 Generate Random Counts for Both</span>
+            </button>
+          </div>
+
+          <!-- Quick Presets -->
+          <div class="presets-container">
+            <span class="presets-label">Regional Presets:</span>
+            <div class="preset-buttons">
+              <button type="button" class="preset-btn" data-area="Hostel Corridor B" data-vazhas="48" data-trees="2">Hostel Corridor</button>
+              <button type="button" class="preset-btn" data-area="Ammachi's Parambu" data-vazhas="3" data-trees="42">Ammachi's Parambu</button>
+              <button type="button" class="preset-btn" data-area="City Center Tea Stall" data-vazhas="24" data-trees="22">Tea Stall</button>
+              <button type="button" class="preset-btn" data-area="Zero Tree Wasteland" data-vazhas="16" data-trees="0">Tree-Free Zone</button>
+            </div>
+          </div>
+
+          <!-- Calculate Button -->
+          <div class="form-actions">
+            <button type="button" id="calculate-btn" class="primary-btn">
+              <span class="btn-icon">⚡</span>
+              <span class="btn-text">Calculate Ratio</span>
+            </button>
+            <button type="button" id="reset-btn" class="secondary-btn" title="Reset form">
+              ↺ Reset
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Gauge & Live Verdict Section (Step 5 & 6) -->
+      <section class="card verdict-card" id="verdict-section">
+        <div class="card-header">
+          <div class="icon-bubble">🎯</div>
+          <div>
+            <h2 class="card-title">Live Vazhameter</h2>
+            <p class="card-sub">Instant visual analysis & verdict rating</p>
+          </div>
+        </div>
+
+        <!-- Visual Meter / Gauge (Step 5) -->
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 200 120" id="gauge-meter">
+            <!-- Background Arc -->
+            <path class="gauge-bg-arc" d="M 20 105 A 80 80 0 0 1 180 105" />
+            <!-- Color Segment Arcs -->
+            <path class="gauge-segment seg-low" d="M 20 105 A 80 80 0 0 1 65 39" />
+            <path class="gauge-segment seg-med" d="M 65 39 A 80 80 0 0 1 135 39" />
+            <path class="gauge-segment seg-high" d="M 135 39 A 80 80 0 0 1 180 105" />
+            
+            <!-- Gauge Needle -->
+            <g id="needle-group" class="gauge-needle-group">
+              <line x1="100" y1="100" x2="100" y2="30" class="gauge-needle-line" />
+              <circle cx="100" cy="100" r="7" class="gauge-needle-hub" />
+              <circle cx="100" cy="100" r="3" class="gauge-needle-pin" />
+            </g>
+
+            <!-- Gauge Labels -->
+            <text x="22" y="118" class="gauge-legend-text">Trees Win</text>
+            <text x="100" y="24" class="gauge-legend-text center">Balanced</text>
+            <text x="178" y="118" class="gauge-legend-text right">Vazha Alert</text>
+          </svg>
+
+          <div class="gauge-center-reading">
+            <span class="gauge-ratio-value" id="gauge-ratio-display">1.50</span>
+            <span class="gauge-ratio-unit">Vazhas per Tree</span>
+          </div>
+        </div>
+
+        <!-- Verdict Banner (Step 6) -->
+        <div class="verdict-banner" id="verdict-banner">
+          <div class="verdict-tag" id="verdict-tag">
+            <span id="verdict-icon">⚖️</span>
+            <span id="verdict-title">Balanced Equilibrium</span>
+          </div>
+          <p class="verdict-description" id="verdict-desc">
+            A harmonious balance between oxygen-producing plants and chill-seeking human beings.
+          </p>
+          <div class="verdict-action" id="verdict-tip">
+            💡 <em>Advice: Keep watering the trees, lest the vazhas outnumber them.</em>
+          </div>
+        </div>
+
+        <button type="button" id="save-leaderboard-btn" class="tertiary-btn">
+          <span>📌 Pin Area to Leaderboard</span>
+        </button>
+      </section>
+    </main>
+
+    <!-- Results Cards Section (Step 5: Vazhas, Banana Trees, and ratio in three result cards) -->
+    <section class="results-container" id="results-cards-section">
+      <div class="result-card" id="card-vazhas">
+        <div class="result-card-top">
+          <span class="card-label">Identified Vazhas</span>
+          <span class="metric-icon">🛋️</span>
+        </div>
+        <div class="metric-value-container">
+          <span class="metric-value" id="res-vazhas">0</span>
+          <span class="metric-unit">souls</span>
+        </div>
+        <p class="metric-footer">Randomly sampled idle energy</p>
+      </div>
+
+      <div class="result-card" id="card-trees">
+        <div class="result-card-top">
+          <span class="card-label">Actual Banana Trees</span>
+          <span class="metric-icon">🌴</span>
+        </div>
+        <div class="metric-value-container">
+          <span class="metric-value" id="res-trees">0</span>
+          <span class="metric-unit">plants</span>
+        </div>
+        <p class="metric-footer">Photosynthetic powerhouses</p>
+      </div>
+
+      <div class="result-card highlight-card" id="card-ratio">
+        <div class="result-card-top">
+          <span class="card-label">Vazha : Tree Ratio</span>
+          <span class="metric-icon">📊</span>
+        </div>
+        <div class="metric-value-container">
+          <span class="metric-value" id="res-ratio">0.00</span>
+          <span class="metric-unit">ratio</span>
+        </div>
+        <p class="metric-footer" id="ratio-verdict-summary">Balanced zone</p>
+      </div>
+    </section>
+
+    <!-- Leaderboard / History Section (Step 7: 3-5 fictional areas) -->
+    <section class="card leaderboard-card" id="leaderboard-section">
+      <div class="card-header leaderboard-header">
+        <div>
+          <div class="header-inline">
+            <div class="icon-bubble">🏆</div>
+            <h2 class="card-title">Regional Census & Leaderboard</h2>
+          </div>
+          <p class="card-sub">Historical survey records from fictional & scanned territories</p>
+        </div>
+        <div class="leaderboard-controls">
+          <button type="button" class="filter-chip active" data-filter="all">All Areas</button>
+          <button type="button" class="filter-chip" data-filter="low">Trees Winning</button>
+          <button type="button" class="filter-chip" data-filter="high">Vazha Zones</button>
+          <button type="button" id="clear-custom-btn" class="text-btn" title="Reset to sample data">Restore Default</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" id="leaderboard-table">
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th class="col-area">Area Name</th>
+              <th class="col-vazhas">Vazhas</th>
+              <th class="col-trees">Banana Trees</th>
+              <th class="col-ratio">Ratio (V : T)</th>
+              <th class="col-verdict">Verdict</th>
+              <th class="col-status">Classification</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <!-- Populated via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer & Polish (Step 8: team name, logo/text, better copy) -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-emoji">🍌</span>
+          <div>
+            <strong>Vazha Vision 3.0</strong>
+            <p>A strictly useless botanical-demographic computing initiative.</p>
+          </div>
+        </div>
+        <div class="footer-credits">
+          <p>Created with 💚 for <strong>TinkerHub Useless Projects 3.0</strong></p>
+          <p class="team-signature">Team: <em>Vazha Visionaries</em></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <!-- Embedded JavaScript Logic for 100% self-contained execution -->
+  <script>
+    // Initial Sample Leaderboard Data (Step 7: 3-5 fictional areas)
+    const DEFAULT_LEADERBOARD = [
+      {
+        id: "lb-1",
+        area: "Ammachi's Parambu, Kottayam",
+        vazhas: 2,
+        trees: 40,
+        ratio: 0.05,
+        verdict: "Banana Trees Winning",
+        status: "low",
+        tag: "Agricultural Paradise"
+      },
+      {
+        id: "lb-2",
+        area: "Green Valley Farm, Wayanad",
+        vazhas: 5,
+        trees: 55,
+        ratio: 0.09,
+        verdict: "Banana Trees Winning",
+        status: "low",
+        tag: "Heavy Productivity"
+      },
+      {
+        id: "lb-3",
+        area: "Infopark Courtyard, Kakkanad",
+        vazhas: 32,
+        trees: 30,
+        ratio: 1.07,
+        verdict: "Balanced",
+        status: "med",
+        tag: "Equilibrium Zone"
+      },
+      {
+        id: "lb-4",
+        area: "Chai Katta Junction, Thrissur",
+        vazhas: 54,
+        trees: 6,
+        ratio: 9.00,
+        verdict: "Serious Vazha Zone",
+        status: "high",
+        tag: "High Idle Density"
+      },
+      {
+        id: "lb-5",
+        area: "BTech Hostel Block B",
+        vazhas: 95,
+        trees: 2,
+        ratio: 47.50,
+        verdict: "Serious Vazha Zone",
+        status: "high",
+        tag: "Critical Sloth Singularity"
+      }
+    ];
+
+    let currentCalculation = null;
+    let leaderboardData = [];
+    let currentFilter = "all";
+
+    // Elements
+    const areaInput = document.getElementById("area-input");
+    const vazhaInput = document.getElementById("vazha-input");
+    const bananaTreeInput = document.getElementById("banana-tree-input");
+    const randomVazhaBtn = document.getElementById("random-vazha-btn");
+    const randomTreeBtn = document.getElementById("random-tree-btn");
+    const randomizeBothBtn = document.getElementById("randomize-both-btn");
+    const calculateBtn = document.getElementById("calculate-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const saveLeaderboardBtn = document.getElementById("save-leaderboard-btn");
+    const clearCustomBtn = document.getElementById("clear-custom-btn");
+
+    const resVazhas = document.getElementById("res-vazhas");
+    const resTrees = document.getElementById("res-trees");
+    const resRatio = document.getElementById("res-ratio");
+    const ratioVerdictSummary = document.getElementById("ratio-verdict-summary");
+    const gaugeRatioDisplay = document.getElementById("gauge-ratio-display");
+    const needleGroup = document.getElementById("needle-group");
+
+    const verdictBanner = document.getElementById("verdict-banner");
+    const verdictIcon = document.getElementById("verdict-icon");
+    const verdictTitle = document.getElementById("verdict-title");
+    const verdictDesc = document.getElementById("verdict-desc");
+    const verdictTip = document.getElementById("verdict-tip");
+
+    const leaderboardBody = document.getElementById("leaderboard-body");
+    const filterChips = document.querySelectorAll(".filter-chip");
+    const toast = document.getElementById("toast");
+
+    // Random Number Generators (Step 2: randomly generated vazha input & banana tree input)
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateRandomVazhas() {
+      // Generate between 1 and 75
+      const val = getRandomInt(1, 75);
+      vazhaInput.value = val;
+      vazhaInput.classList.remove("rolling");
+      void vazhaInput.offsetWidth;
+      vazhaInput.classList.add("rolling");
+      return val;
+    }
+
+    function generateRandomTrees() {
+      // Generate between 0 and 60 (allow 0 occasionally to demonstrate safe handling!)
+      const val = getRandomInt(0, 50);
+      bananaTreeInput.value = val;
+      bananaTreeInput.classList.remove("rolling");
+      void bananaTreeInput.offsetWidth;
+      bananaTreeInput.classList.add("rolling");
+      return val;
+    }
+
+    function generateRandomBoth() {
+      const v = generateRandomVazhas();
+      const t = generateRandomTrees();
+      showToast(`🎲 Randomly generated: ${v} Vazhas, ${t} Banana Trees`);
+      handleCalculate();
+    }
+
+    // Audio effects via Web Audio API
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playVerdictSound(status) {
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        const now = ctx.currentTime;
+
+        if (status === "low") {
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (status === "med") {
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.15);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else {
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.exponentialRampToValueAtTime(110, now + 0.4);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        }
+      } catch (e) {}
+    }
+
+    // Step 4: Calculation Logic (vazhas ÷ banana trees, handle zero banana trees safely)
+    function computeVazhaMetrics(vazhas, trees) {
+      let ratio = 0;
+      let isInfinity = false;
+
+      // Handle zero banana trees safely
+      if (trees === 0) {
+        if (vazhas === 0) {
+          ratio = 0;
+        } else {
+          isInfinity = true;
+          ratio = Infinity;
+        }
+      } else {
+        ratio = vazhas / trees;
+      }
+
+      // Step 6: Verdict (Low = banana trees winning; medium = balanced; high = serious Vazha Zone)
+      let status = "med";
+      let verdictTitleText = "";
+      let verdictDescText = "";
+      let tipText = "";
+      let icon = "";
+
+      if (isInfinity) {
+        status = "high";
+        icon = "🚨";
+        verdictTitleText = "Absolute Vazha Singularity";
+        verdictDescText = "Zero actual banana trees detected! The entire zone is inhabited purely by certified Vazhas.";
+        tipText = "⚠️ Emergency intervention: Plant a botanical banana sapling immediately!";
+      } else if (ratio < 0.8) {
+        status = "low";
+        icon = "🌿";
+        verdictTitleText = "Banana Trees Winning";
+        verdictDescText = "Photosynthetic dominance! Nature is thriving with high oxygen, high productivity, and minimal slacking.";
+        tipText = "🍌 Result: Clean, productive air and healthy output. Keep up the green kingdom!";
+      } else if (ratio <= 1.5) {
+        status = "med";
+        icon = "⚖️";
+        verdictTitleText = "Balanced Equilibrium";
+        verdictDescText = "A harmonious, peaceful coexistence between oxygen-giving plantains and humans enjoying life.";
+        tipText = "💡 Result: Healthy state of equilibrium. Don't let your friends skip tree-watering day!";
+      } else {
+        status = "high";
+        icon = "🛋️";
+        verdictTitleText = "Serious Vazha Zone";
+        verdictDescText = "Alert: Vazhas outnumber functional vegetation. Laziness density has breached critical safety limits!";
+        tipText = "⚠️ Warning: Prolonged presence in this zone may cause sudden afternoon naps and tea stalls visits.";
+      }
+
+      return {
+        vazhas,
+        trees,
+        ratio,
+        isInfinity,
+        status,
+        verdictTitle: verdictTitleText,
+        verdictDesc: verdictDescText,
+        verdictTip: tipText,
+        icon
+      };
+    }
+
+    // Step 5: Visual Meter / Gauge
+    function updateGauge(metrics) {
+      let angle = 0;
+
+      if (metrics.isInfinity) {
+        angle = 80;
+      } else {
+        if (metrics.ratio <= 1.15) {
+          const norm = metrics.ratio / 1.15;
+          angle = -80 + norm * 80;
+        } else {
+          const excess = Math.min(metrics.ratio - 1.15, 1.85);
+          angle = (excess / 1.85) * 80;
+        }
+      }
+
+      needleGroup.style.transform = `rotate(${angle}deg)`;
+
+      if (metrics.isInfinity) {
+        gaugeRatioDisplay.textContent = "∞";
+      } else {
+        gaugeRatioDisplay.textContent = metrics.ratio.toFixed(2);
+      }
+    }
+
+    // Step 5: Render 3 Result Cards
+    function renderCalculation(metrics, triggerFeedback = true) {
+      currentCalculation = metrics;
+
+      animateNumber(resVazhas, metrics.vazhas);
+      animateNumber(resTrees, metrics.trees);
+
+      if (metrics.isInfinity) {
+        resRatio.textContent = "∞";
+      } else {
+        resRatio.textContent = metrics.ratio.toFixed(2);
+      }
+
+      ratioVerdictSummary.textContent = `${metrics.verdictTitle} (${metrics.status.toUpperCase()})`;
+
+      updateGauge(metrics);
+
+      verdictBanner.className = `verdict-banner status-${metrics.status}`;
+      verdictIcon.textContent = metrics.icon;
+      verdictTitle.textContent = metrics.verdictTitle;
+      verdictDesc.textContent = metrics.verdictDesc;
+      verdictTip.textContent = metrics.verdictTip;
+
+      const cards = document.querySelectorAll(".result-card");
+      cards.forEach(card => {
+        card.classList.remove("animate-pop");
+        void card.offsetWidth;
+        card.classList.add("animate-pop");
+      });
+
+      if (triggerFeedback) {
+        playVerdictSound(metrics.status);
+      }
+    }
+
+    function animateNumber(element, targetValue) {
+      const startValue = parseInt(element.textContent.replace(/[^0-9]/g, "")) || 0;
+      if (isNaN(startValue) || startValue === targetValue) {
+        element.textContent = targetValue;
+        return;
+      }
+
+      const duration = 400;
+      const startTime = performance.now();
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.round(startValue + (targetValue - startValue) * progress);
+        element.textContent = current;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = targetValue;
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // Step 7: Sample Data Leaderboard
+    function initLeaderboard() {
+      const saved = localStorage.getItem("vazha_leaderboard");
+      if (saved) {
+        try {
+          leaderboardData = JSON.parse(saved);
+        } catch (e) {
+          leaderboardData = [...DEFAULT_LEADERBOARD];
+        }
+      } else {
+        leaderboardData = [...DEFAULT_LEADERBOARD];
+      }
+      renderLeaderboard();
+    }
+
+    function saveLeaderboardToStorage() {
+      try {
+        localStorage.setItem("vazha_leaderboard", JSON.stringify(leaderboardData));
+      } catch (e) {}
+    }
+
+    function renderLeaderboard() {
+      let filtered = [...leaderboardData];
+
+      if (currentFilter === "low") {
+        filtered = filtered.filter(item => item.status === "low");
+      } else if (currentFilter === "high") {
+        filtered = filtered.filter(item => item.status === "high");
+      }
+
+      filtered.sort((a, b) => {
+        const ratioA = a.ratio === Infinity ? 999999 : a.ratio;
+        const ratioB = b.ratio === Infinity ? 999999 : b.ratio;
+        return ratioB - ratioA;
+      });
+
+      leaderboardBody.innerHTML = "";
+
+      if (filtered.length === 0) {
+        leaderboardBody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 24px; color: var(--text-muted);">
+              No areas found matching this filter category.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      filtered.forEach((entry, index) => {
+        const tr = document.createElement("tr");
+
+        let rankClass = "rank-badge";
+        if (index === 0) rankClass += " rank-1";
+        else if (index === 1) rankClass += " rank-2";
+        else if (index === 2) rankClass += " rank-3";
+
+        const displayRatio = entry.ratio === Infinity ? "∞ (Max)" : entry.ratio.toFixed(2);
+        const tagClass = `badge-tag tag-${entry.status}`;
+
+        tr.innerHTML = `
+          <td class="col-rank"><span class="${rankClass}">${index + 1}</span></td>
+          <td class="col-area"><strong>${escapeHtml(entry.area)}</strong></td>
+          <td class="col-vazhas">${entry.vazhas}</td>
+          <td class="col-trees">${entry.trees}</td>
+          <td class="col-ratio"><strong style="color: #fff;">${displayRatio}</strong></td>
+          <td class="col-verdict"><span class="${tagClass}">${escapeHtml(entry.verdict)}</span></td>
+          <td class="col-status"><small style="color: var(--text-muted);">${escapeHtml(entry.tag || "Field Survey")}</small></td>
+        `;
+
+        leaderboardBody.appendChild(tr);
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2800);
+    }
+
+    // Step 2 & 4: Calculate Action
+    function handleCalculate() {
+      const area = areaInput.value.trim() || "Unspecified Region";
+      const vazhas = parseInt(vazhaInput.value, 10);
+      const trees = parseInt(bananaTreeInput.value, 10);
+
+      if (isNaN(vazhas) || vazhas < 0) {
+        showToast("⚠️ Please enter or roll a valid number of Vazhas.");
+        vazhaInput.focus();
+        return;
+      }
+
+      if (isNaN(trees) || trees < 0) {
+        showToast("⚠️ Please enter or roll a valid number of Banana Trees.");
+        bananaTreeInput.focus();
+        return;
+      }
+
+      const metrics = computeVazhaMetrics(vazhas, trees);
+      metrics.area = area;
+      renderCalculation(metrics, true);
+      showToast(`✅ Calculated: ${metrics.isInfinity ? "∞" : metrics.ratio.toFixed(2)} (${metrics.verdictTitle})`);
+    }
+
+    function handleSaveToLeaderboard() {
+      if (!currentCalculation) handleCalculate();
+
+      const area = areaInput.value.trim() || "Custom Regional Survey";
+      const newEntry = {
+        id: "lb-" + Date.now(),
+        area: area,
+        vazhas: currentCalculation.vazhas,
+        trees: currentCalculation.trees,
+        ratio: currentCalculation.ratio,
+        verdict: currentCalculation.verdictTitle,
+        status: currentCalculation.status,
+        tag: "User Live Census"
+      };
+
+      leaderboardData.unshift(newEntry);
+      saveLeaderboardToStorage();
+      renderLeaderboard();
+      showToast(`📌 "${area}" pinned to Leaderboard!`);
+      document.getElementById("leaderboard-section").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function setupPresets() {
+      const presetBtns = document.querySelectorAll(".preset-btn");
+      presetBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          areaInput.value = btn.getAttribute("data-area");
+          vazhaInput.value = btn.getAttribute("data-vazhas");
+          bananaTreeInput.value = btn.getAttribute("data-trees");
+          handleCalculate();
+        });
+      });
+    }
+
+    function setupFilters() {
+      filterChips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          filterChips.forEach(c => c.classList.remove("active"));
+          chip.classList.add("active");
+          currentFilter = chip.getAttribute("data-filter");
+          renderLeaderboard();
+        });
+      });
+    }
+
+    function handleReset() {
+      areaInput.value = "Regional Survey Point";
+      generateRandomVazhas();
+      generateRandomTrees();
+      handleCalculate();
+      showToast("↺ Form reset with fresh random values");
+    }
+
+    // Initialize Everything
+    function init() {
+      // Step 2 requirement: randomly generated vazha input, randomly generated banana-tree input
+      generateRandomVazhas();
+      generateRandomTrees();
+
+      const initialVazhas = parseInt(vazhaInput.value, 10);
+      const initialTrees = parseInt(bananaTreeInput.value, 10);
+      const initialMetrics = computeVazhaMetrics(initialVazhas, initialTrees);
+      initialMetrics.area = areaInput.value;
+
+      renderCalculation(initialMetrics, false);
+      initLeaderboard();
+      setupPresets();
+      setupFilters();
+
+      // Event Listeners
+      calculateBtn.addEventListener("click", handleCalculate);
+      resetBtn.addEventListener("click", handleReset);
+      saveLeaderboardBtn.addEventListener("click", handleSaveToLeaderboard);
+
+      randomVazhaBtn.addEventListener("click", () => {
+        const val = generateRandomVazhas();
+        showToast(`🎲 Random Vazhas: ${val}`);
+        handleCalculate();
+      });
+
+      randomTreeBtn.addEventListener("click", () => {
+        const val = generateRandomTrees();
+        showToast(`🎲 Random Banana Trees: ${val}`);
+        handleCalculate();
+      });
+
+      randomizeBothBtn.addEventListener("click", generateRandomBoth);
+
+      [areaInput, vazhaInput, bananaTreeInput].forEach(input => {
+        input.addEventListener("keydown", e => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            handleCalculate();
+          }
+        });
+      });
+
+      clearCustomBtn.addEventListener("click", () => {
+        leaderboardData = [...DEFAULT_LEADERBOARD];
+        saveLeaderboardToStorage();
+        renderLeaderboard();
+        showToast("Leaderboard restored to initial sample data.");
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
