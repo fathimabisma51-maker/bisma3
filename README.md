@@ -2,7 +2,7 @@
 
 
 
-# [Project Name] 🎯
+# Vazha Vision 🎯
 
 
 ## Basic Details
@@ -45,11 +45,9 @@ regional census and leaderboard](Add screenshot 3 here with proper name)
 
 ### Project Demo
 # Video
-[]
-*Explain what the video demonstrates*
+https://github.com/fathimabisma51-maker/bisma3/blob/main/Vazhavision%20desc.mp4
 
-# Additional Demos
-[]
+*the video about how the website helps us to find the ratio between the number of vazhas and the number of banana trees*
 
 ## Team Contributions
 - [Bisma]: [HTML developer]
